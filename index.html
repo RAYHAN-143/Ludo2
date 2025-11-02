@@ -3,57 +3,81 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>লুডু অনলাইন (Red vs Orange)</title>
+  <title>লুডু অনলাইন — Lobby (3 min)</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🎲 লুডু অনলাইন — Red vs Orange</h1>
+  <header>
+    <h1>🎲 লুডু — RAYHAN (3 মিনিট ম্যাচ)</h1>
+    <div id="topStatus">
+      <span id="lobbyStatus">Lobby: waiting...</span>
+      <span id="timer">Time: --:--</span>
+    </div>
+  </header>
 
-  <div class="top">
-    <label>Room ID: <input id="roomId" value="room1"></label>
-    <button id="createBtn">Create / Join</button>
-    <span id="status">Not connected</span>
-  </div>
+  <main>
+    <section id="boardWrap">
+      <div id="board"></div>
+      <!-- tokens rendered absolutely over board -->
+    </section>
 
-  <div class="game" id="game" style="display:none;">
-    <div id="board"></div>
+    <section id="side">
+      <div class="playerPanel" id="panelP1">
+        <h3>🔴 Red — <span id="labelP1">Waiting</span></h3>
+        <div class="diceWrap">
+          <div class="dice" id="diceP1" data-player="p1">
+            <div class="face face1">1</div>
+            <div class="face face2">2</div>
+            <div class="face face3">3</div>
+            <div class="face face4">4</div>
+            <div class="face face5">5</div>
+            <div class="face face6">6</div>
+          </div>
+        </div>
+        <button id="rollP1" class="rollBtn" disabled>Roll</button>
+        <p>Score: <span id="scoreP1">0</span></p>
+      </div>
 
-    <div class="controls">
-      <div class="info">
-        <p>তুমি: <span id="playerLabel">-</span></p>
-        <p>বর্তমান পালা: <span id="currentPlayer">-</span></p>
-        <p>ডাইস: <span id="diceValue">-</span></p>
+      <div class="playerPanel" id="panelP2">
+        <h3>🟧 Orange — <span id="labelP2">Waiting</span></h3>
+        <div class="diceWrap">
+          <div class="dice" id="diceP2" data-player="p2">
+            <div class="face face1">1</div>
+            <div class="face face2">2</div>
+            <div class="face face3">3</div>
+            <div class="face face4">4</div>
+            <div class="face face5">5</div>
+            <div class="face face6">6</div>
+          </div>
+        </div>
+        <button id="rollP2" class="rollBtn" disabled>Roll</button>
+        <p>Score: <span id="scoreP2">0</span></p>
+      </div>
+
+      <div id="controls">
+        <button id="enterLobby">Enter Lobby</button>
         <p id="message"></p>
       </div>
-
-      <div class="actions">
-        <button id="rollBtn">ডাইস ঘোরাও</button>
-        <button id="readyBtn">Ready</button>
-      </div>
-
-      <div class="scores">
-        <p>Red (Player 1): <span id="p1Points">0</span></p>
-        <p>Orange (Player 2): <span id="p2Points">0</span></p>
-      </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
   <script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyACtYbS0LXQVuR9PbEspGn9NUiXfMZBPUE",
-    authDomain: "ludo-game-d6f45.firebaseapp.com",
-    databaseURL: "https://ludo-game-d6f45-default-rtdb.firebaseio.com",
-    projectId: "ludo-game-d6f45",
-    storageBucket: "ludo-game-d6f45.firebasestorage.app",
-    messagingSenderId: "721569281761",
-    appId: "1:721569281761:web:c3cbf3896b1dcc3253a9a0"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
+    // --------- PUT YOUR FIREBASE CONFIG (YOU ALREADY PROVIDED) ----------
+    const firebaseConfig = {
+      apiKey: "AIzaSyACtYbS0LXQVuR9PbEspGn9NUiXfMZBPUE",
+      authDomain: "ludo-game-d6f45.firebaseapp.com",
+      databaseURL: "https://ludo-game-d6f45-default-rtdb.firebaseio.com",
+      projectId: "ludo-game-d6f45",
+      storageBucket: "ludo-game-d6f45.firebasestorage.app",
+      messagingSenderId: "721569281761",
+      appId: "1:721569281761:web:c3cbf3896b1dcc3253a9a0"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
   </script>
 
   <script src="script.js"></script>
